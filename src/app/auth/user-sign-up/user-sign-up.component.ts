@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { AuthService } from "src/app/auth.service";
 import { MatSnackBar } from "@angular/material";
+declare var $: any;
 
 @Component({
   selector: "app-user-sign-up",
@@ -19,19 +20,29 @@ export class UserSignUpComponent implements OnInit {
 
   ngOnInit() {
     this.initFormControl();
+    $(".form-input-styled").uniform();
   }
 
   initFormControl() {
     this.userForm = this.formBuilder.group({
-      first_name: ["",[Validators.required, Validators.pattern("([a-zA-Z]+)")]],
+      first_name: [
+        "",
+        [Validators.required, Validators.pattern("([a-zA-Z]+)")],
+      ],
       last_name: ["", [Validators.required, Validators.pattern("([a-zA-Z]+)")]],
-      email_id: ["", [Validators.pattern('([a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,})')]],
+      email_id: [
+        "",
+        [
+          Validators.pattern(
+            "([a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,})"
+          ),
+        ],
+      ],
       password: ["", Validators.required],
     });
   }
 
   onSave() {
-    console.log(this.userForm.value);
 
     if (!this.userForm.valid) {
       this.authService.openToast(
@@ -40,7 +51,7 @@ export class UserSignUpComponent implements OnInit {
       );
       return;
     }
-    
+
     this.authService.userRegister(this.userForm.value).subscribe(
       (data) => {
         if (data) {
@@ -48,8 +59,7 @@ export class UserSignUpComponent implements OnInit {
         }
       },
       (err) => {
-        this.authService.openToast(err["error"]["message"]
-        , 'Close');
+        this.authService.openToast(err["error"]["message"], "Close");
       }
     );
   }

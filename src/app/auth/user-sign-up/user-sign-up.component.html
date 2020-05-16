@@ -1,13 +1,12 @@
 <!-- Registration form -->
 <div class="content d-flex justify-content-center align-items-center">
-  <form [formGroup]="userForm" class="flex-fill">
+  <form [formGroup]="userForm" class="form-validate-jquery" class="flex-fill">
     <div class="row">
       <div class="col-lg-6 offset-lg-3">
         <div class="card mb-0">
           <div class="card-body">
             <div class="text-center mb-3">
               <h2 class="mb-0">Create account</h2>
-              <span class="d-block text-muted">All fields are required</span>
             </div>
 
             <div class="row">
@@ -15,16 +14,15 @@
                 <div
                   class="form-group form-group-feedback form-group-feedback-right"
                 >
+                  <label>First Name:<span class="text-danger">*</span></label>
+
                   <input
                     type="text"
+                    name="firstName"
                     class="form-control"
-                    placeholder="First name"
                     formControlName="first_name"
                     required
                   />
-                  <div class="form-control-feedback">
-                    <i class="icon-user-check text-muted"></i>
-                  </div>
                 </div>
               </div>
 
@@ -32,15 +30,15 @@
                 <div
                   class="form-group form-group-feedback form-group-feedback-right"
                 >
+                  <label>Last Name:<span class="text-danger">*</span></label>
+
                   <input
                     type="text"
                     class="form-control"
-                    placeholder="Last name"
+                    name="lastName"
                     formControlName="last_name"
+                    required
                   />
-                  <div class="form-control-feedback">
-                    <i class="icon-user-check text-muted"></i>
-                  </div>
                 </div>
               </div>
             </div>
@@ -50,15 +48,15 @@
                 <div
                   class="form-group form-group-feedback form-group-feedback-right"
                 >
+                  <label>Email:<span class="text-danger">*</span></label>
+
                   <input
                     type="email"
                     class="form-control"
-                    placeholder="Email"
+                    name="email"
                     formControlName="email_id"
+                    required
                   />
-                  <div class="form-control-feedback">
-                    <i class="icon-mention text-muted"></i>
-                  </div>
                 </div>
               </div>
 
@@ -66,23 +64,24 @@
                 <div
                   class="form-group form-group-feedback form-group-feedback-right"
                 >
+                  <label>Password:<span class="text-danger">*</span></label>
                   <input
                     type="password"
                     class="form-control"
-                    placeholder="Password"
+                    name="password"
                     formControlName="password"
+                    required
                   />
-                  <div class="form-control-feedback">
-                    <i class="icon-user-lock text-muted"></i>
-                  </div>
                 </div>
               </div>
             </div>
 
             <button
-              type="submit" (click)="onSave()"
+              type="submit"
+              (click)="onSave()"
               class="btn bg-teal-400 btn-labeled btn-labeled-right"
-            > Sign Up
+            >
+              Sign Up
             </button>
           </div>
         </div>
